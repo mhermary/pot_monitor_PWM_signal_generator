@@ -61,11 +61,11 @@ float freq = 0;
 int r_thou = 0;
 int r_hun = 0;
 int r_ten = 0;
-int	r_one = 0;
+int r_one = 0;
 int f_thou = 0;
 int f_hun = 0;
 int f_ten = 0;
-int	f_one = 0;
+int f_one = 0;
 
 int main(int argc, char* argv[])
 {
@@ -98,7 +98,6 @@ int main(int argc, char* argv[])
 		r_hun = r_hun + 48;
 		r_ten = r_ten + 48;
 		r_one = r_one + 48;
-		//r_one = rand()%(10) + 48;
 
 		//PARSE FREQUENCY
 		f_thou = freq/1000;
@@ -181,56 +180,56 @@ void write_LCD ()
 	GPIOB->ODR = 0xC000;	//Sets address to 40 (bottom line)
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	//Now passing bottom line
 	GPIOB->ODR = 0x5220;	//246;	//Sends R
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0)
 
 	GPIOB->ODR = 0x3A20;	//Sends :
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	GPIOB->ODR = 0x0020 | (r_thou<<8);	//Sends First digit
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	GPIOB->ODR = 0x0020 | (r_hun<<8);	//Sends Second digit
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	GPIOB->ODR = 0x0020 | (r_ten<<8);	//Sends third digit
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	GPIOB->ODR = 0x0020 | (r_one<<8);	//Sends fourth digit
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) == 0);
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while((GPIOB->IDR & GPIO_IDR_7) != 0);
 
 	GPIOB->ODR = 0x4F20;	//Sends H
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) != Bit_SET);	//Wait for "done" to be raised
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) != Bit_RESET);	//Wait for "done" to be lowered
 
 	GPIOB->ODR = 0x6820; 	//Sends z
 	GPIOB->ODR |= GPIO_ODR_4;	//Raise "Enable" bit 4
 	while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) != Bit_SET);	//Wait for "done" to be raised
-	GPIOB->ODR ^= GPIO_ODR_4;		//Lower "Enable" bit 4
+	GPIOB->ODR ^= GPIO_ODR_4;	//Lower "Enable" bit 4
 	while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7) != Bit_RESET);	//Wait for "done" to be lowered
 }
 
